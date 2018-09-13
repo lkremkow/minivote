@@ -1,0 +1,21 @@
+<div class="container">
+
+  <div class="row mt-2 mb-1">
+    <div class="col-12"><h2>About</h2></div>
+  </div>
+
+  <div class="row mt-2 mb-1">
+    <div class="col-10">Your unique user ID: {{voter_id}}</div>
+    <div class="col-2"><button class="btn btn-light btn-sm" (click)="reset_voter_id()">Delete</button></div>
+  </div>
+
+  <div class="row mt-2 mb-1">
+    <div class="col-10">Your current vote event ID: {{voting_event_id}}</div>
+    <div class="col-2"><button class="btn btn-light btn-sm" (click)="reset_voting_event_id()">Delete</button></div>
+  </div>
+  
+  <div class="row mt-2 mb-1" *ngIf="voter_id === 'not set'">
+    <div class="col-12 alert alert-warning">Please reload your browser if you want to continue using this site.</div>
+  </div>  
+
+</div>

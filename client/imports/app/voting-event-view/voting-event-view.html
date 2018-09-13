@@ -1,0 +1,37 @@
+<div class="container" *ngIf="show_vote_event">
+
+    <div class="row">
+      <div class="col-8"><h2>view voting event</h2></div>
+      <div class="col-4 text-center"><a href="#" routerLink="/mgr"><button class="btn btn-primary btn-sm">back</button></a></div>
+    </div>
+  
+    <div class="row">
+        <div class="col-2">Public ID:</div>
+        <div class="col-10">{{voting_event.public_id}}</div>
+      </div>
+    
+      <div class="row">
+        <div class="col-2">Title:</div>
+        <div class="col-10">{{voting_event.title}}</div>
+      </div>
+    
+      <div class="row">
+        <div class="col-2">Introduction:</div>
+        <div class="col-10">{{voting_event.introduction}}</div>
+      </div>
+    
+      <div class="row">
+        <div class="col-2">Start time:</div>
+        <div class="col-10">{{voting_event.start_time}}</div>
+      </div>
+      
+      <div class="row">
+        <div class="col-2">End time:</div>
+        <div class="col-10">{{voting_event.end_time}}</div>    
+      </div>
+  
+  </div>
+  
+  <div *ngIf="show_vote_event">
+    <vote-subject [votingEventID]="voting_event._id"></vote-subject>
+  </div>

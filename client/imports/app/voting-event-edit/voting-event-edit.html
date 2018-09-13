@@ -1,0 +1,34 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-8"><h2>voting event</h2></div>
+    <div class="col-2 text-center"><a href="#" routerLink="/mgr"><button class="btn btn-warning btn-sm">back</button></a></div>    
+    <div class="col-2 text-center"><button class="btn btn-success btn-sm" (click)="saveVotingEvent()">save</button></div>
+  </div>
+
+  <div class="row">
+    <div class="col-2"><label for="content">Public ID:</label></div>
+    <div class="col-10"><input [(ngModel)]="voting_event.public_id" size="42"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-2"><label for="content">Title:</label></div>
+    <div class="col-10"><input [(ngModel)]="voting_event.title" size="42"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-2"><label for="content">Introduction:</label></div>
+    <div class="col-10"><input [(ngModel)]="voting_event.introduction" size="42"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-2"><label for="content">Start time:</label></div>
+    <div class="col-10"><input [(ngModel)]="voting_event.start_time" size="42"></div>
+  </div>
+  
+  <div class="row">
+    <div class="col-2"><label for="content">End time:</label></div>
+    <div class="col-10"><input [(ngModel)]="voting_event.end_time" size="42"></div>    
+  </div>
+
+</div>

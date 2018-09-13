@@ -1,0 +1,15 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-8"><h2>all events</h2></div>
+    <div class="col-4 text-center"><a href="#" routerLink="/voting-event-edit"><button class="btn btn-success btn-sm">new event</button></a></div>
+  </div>
+  
+  <div class="row mt-2 mb-2" *ngFor="let one_voting_event of all_voting_events | async">
+      <div class="col-12 col-sm-4">{{one_voting_event.title}}</div>
+      <div class="col-4 col-sm-4 text-center"><a href="#" [routerLink]="['/voting-event-view', one_voting_event._id]"><button class="btn btn-primary btn-sm">edit subjects</button></a></div>
+      <div class="col-2 col-sm-2 text-center"><a href="#" [routerLink]="['/voting-event-edit', one_voting_event._id]"><button class="btn btn-info btn-sm">edit</button></a></div>
+      <div class="col-3 col-sm-2 text-center"><button class="btn btn-danger btn-sm" (click)="removeVotingEvent(one_voting_event._id)">delete</button></div>      
+  </div>
+
+</div>

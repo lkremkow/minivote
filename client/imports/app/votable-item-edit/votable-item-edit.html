@@ -1,0 +1,24 @@
+<div class="container" *ngIf="votable_item">
+
+  <div class="row">
+    <div class="col-4"><a href="#" routerLink="/welcome"><button class="btn btn-warning">back</button></a></div>
+    <div class="col-4"><h2>votable item</h2></div>
+    <div class="col-4"><button class="btn btn-success" (click)="saveVotableItem()">save</button></div>
+  </div>
+
+  <div class="row">
+    <div class="col-2"><label for="content">Title:</label></div>
+    <div class="col-10"><input [(ngModel)]="votable_item.title" size="42"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-2"><label for="content">Description:</label></div>
+    <div class="col-10"><input [(ngModel)]="votable_item.description" size="42"></div>
+  </div>
+
+  <!-- <div class="row">
+    <div class="col-2"><label for="content">Author:</label></div>
+    <div class="col-10">{{votable_item.author}}</div>
+  </div> -->
+  
+</div>

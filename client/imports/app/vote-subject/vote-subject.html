@@ -1,0 +1,25 @@
+<div class="container">
+  
+  <div class="row">
+    <div class="col-12"><h3>questions</h3></div>
+  </div>
+
+  <div class="row">
+    <div class="col-2"><label for="content">New question:</label></div>
+    <div class="col-8"><input type="text" [(ngModel)]="new_vote_subject.question_text" size="42"></div>
+    <div class="col-2"><button class="btn btn-primary btn-sm" (click)="addVoteSubject()">add</button></div>
+  </div>
+
+  <div *ngIf="selected_vote_subjects">
+    <div class="row mt-1 mb-1" *ngFor="let one_vote_subject of selected_vote_subjects | async; let position = index">
+      <div class="col-1"><button class="btn btn-warning btn-sm" (click)="updateVotingEvent(one_vote_subject)">update</button></div>
+      <div class="col-1"><input type="number" style="width: 3em;" [(ngModel)]="one_vote_subject.question_number"></div>
+      <div class="col-3"><input type="text" [(ngModel)]="one_vote_subject.question_text" size="20"></div>
+      <div class="col-2">Show: <input type="checkbox" [(ngModel)]="one_vote_subject.show_question"></div>
+      <div class="col-2">Results: <input type="checkbox" [(ngModel)]="one_vote_subject.show_results"></div>
+      <div class="col-2">Modifiable: <input type="checkbox" [(ngModel)]="one_vote_subject.voter_editable"></div>
+      <div class="col-1"><button class="btn btn-danger btn-sm" (click)="removeVoteSubject(one_vote_subject._id)">delete</button></div>
+    </div>
+  </div>
+
+</div>

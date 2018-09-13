@@ -1,0 +1,38 @@
+<div class="container" *ngIf="voter_id">
+
+  <div *ngIf="!voting_event_id">
+
+    <div class="row mt-1 mb-1">
+      <div class="col-12"><h2>Join the Vote</h2></div>
+    </div>
+
+    <div class="row mt-1 mb-1">
+      <div class="col-12">Attendee number: {{voter_id}}</div>
+    </div>
+
+    <div class="row mt-1 mb-1">
+      <div class="col-12">Meeting number: <input type="text" [(ngModel)]="public_event_id" (change)="tryPublicID()" size="6"></div>
+    </div>
+
+    <div class="row mt-1 mb-1">
+      <div class="col-12 text-center"><button class="btn btn-success btn-sm" (click)="tryPublicID()">Login</button></div>
+    </div>
+
+    <div class="row mt-1 mb-1">
+      <div class="col-12 text-center"><strong>{{login_message}}</strong></div>
+    </div>
+
+  </div>
+  <div *ngIf="voting_event_id">
+
+    <div class="row mt-1 mb-1">
+      <div class="col-12"><h2>Vote Now</h2></div>
+    </div>
+
+    <subject-index></subject-index>
+
+  </div>
+
+</div>
+
+
