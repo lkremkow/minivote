@@ -22,8 +22,6 @@
 
    `npm install`
 
-   `meteor run`
-
 
 ## Re-Installation
 
