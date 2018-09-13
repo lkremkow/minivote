@@ -1,10 +1,8 @@
-<div class="container">
+
+<div class="row mt-2 mb-2" *ngFor="let oneVotableItem of allVotableItems | async">
+
+  <!-- <div class="col-9 col-sm-11"><strong>{{oneVotableItem.title}}</strong> ({{oneVotableItem.vote_score}})</div> -->
+  <div class="col-12"><strong>{{oneVotableItem.title}}</strong> ({{oneVotableItem.vote_score}})</div>
+  <!-- <div class="col-3 col-sm-1 text-center"></div> -->
   
-  <div class="row mt-2 mb-2" *ngFor="let oneVotableItem of allVotableItems | async">
-
-    <div class="col-3 col-sm-1 text-center">{{oneVotableItem.vote_score}}</div>
-    <div class="col-9 col-sm-11"><strong>{{oneVotableItem.title}}</strong></div>
-
-  </div>
-
 </div>

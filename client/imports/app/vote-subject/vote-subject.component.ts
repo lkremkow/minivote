@@ -22,6 +22,8 @@ import { voteSubject } from '../../../../imports/models/voteSubject';
 export class VoteSubject implements OnInit, OnDestroy {
 
   @Input("votingEventID") voting_event_id: string = "";
+
+  voter_id: string;
   
   session_id: number;
 
@@ -30,12 +32,14 @@ export class VoteSubject implements OnInit, OnDestroy {
   selected_vote_subjects: Observable<voteSubject[]>;
   vote_subjects_subscription: Subscription;
 
-  constructor(private globalData: GlobalDataService, private route: ActivatedRoute, private router: Router) {
+  local_browser_storage: Storage;
+  local_session_storage: Storage;  
+
+  constructor(private route: ActivatedRoute, private router: Router) {
     // console.log("constructor called, voting event ID is:", this.voting_event_id);
     
-    if ( this.globalData.shareObj['session_id'] !== undefined ) {
-      this.session_id = parseInt(this.globalData.shareObj['session_id']);
-    };
+    this.local_browser_storage = window.localStorage;
+    this.local_session_storage = window.sessionStorage;    
 
   };
 
@@ -47,6 +51,8 @@ export class VoteSubject implements OnInit, OnDestroy {
     if ( this.voting_event_id !== "" ) {
       this.fetchVoteSubjects();
     };
+
+    this.voter_id = this.local_browser_storage.getItem("session_id");
 
   };
 
@@ -62,6 +68,7 @@ export class VoteSubject implements OnInit, OnDestroy {
       voting_event_id: this.voting_event_id,
       question_number: 0,
       question_text: null,
+      question_instructions: null,
       show_question: true,
       show_results: false,
       voter_editable: true
@@ -85,9 +92,19 @@ export class VoteSubject implements OnInit, OnDestroy {
     Meteor.call('removeVoteSubject', vote_subject_to_delete_id);
   };
 
+  private removeVotableItemsForSubject(vote_subject_votable_items_to_delete_id: string) {
+    // console.log("asked to delete vote subject,", vote_subject_to_delete_id);
+    Meteor.call('removeVotableItemsForSubject', vote_subject_votable_items_to_delete_id);
+  };
+
   updateVotingEvent(vote_subject_to_update: voteSubject): void {
     // console.log("need to update", vote_subject_to_update._id);
     Meteor.call('updateVoteSubject', vote_subject_to_update);
+  };
+
+  copyPreviousVotableItemsTo(vote_subject_id_to_copy_votable_items_to: string, my_voter_id: string): void {
+    // console.log("need to update", vote_subject_to_update._id);
+    Meteor.call('copyPreviousVotableItemsTo', vote_subject_id_to_copy_votable_items_to, my_voter_id);
   };
 
 }

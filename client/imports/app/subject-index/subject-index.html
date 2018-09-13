@@ -2,19 +2,26 @@
 
   <div *ngIf="selected_vote_subjects">
     <div *ngFor="let one_vote_subject of selected_vote_subjects | async">
-
+      
       <div *ngIf="one_vote_subject.show_question">
+
         <div class="row mt-3 mb-0">
-          <div class="col-12"><strong>{{one_vote_subject.question_number}}. {{one_vote_subject.question_text}}</strong></div>
+          <div class="col-12 alert-warning"><strong>{{one_vote_subject.question_number}}. {{one_vote_subject.question_text}}</strong></div>
         </div>
-        <div class="row">
-          <div class="col-12"><votable-item-list [voteSubjectID]="one_vote_subject._id" [voterEditable]="one_vote_subject.voter_editable"></votable-item-list></div>
-        </div>  
+
+        <div class="row mt-3 mb-0" *ngIf="one_vote_subject.question_instructions">
+          <div class="col-12">{{one_vote_subject.question_instructions}}</div>
+        </div>
+  
+        <div *ngIf="!one_vote_subject.show_results">
+          <votable-item-list [voteSubjectID]="one_vote_subject._id" [voterEditable]="one_vote_subject.voter_editable"></votable-item-list>
+        </div>
+
       </div>
 
       <div *ngIf="one_vote_subject.show_results">
         <div class="row mt-3 mb-0">
-          <div class="col-12"><strong>Result</strong> of the vote on "{{one_vote_subject.question_text}}":</div>
+          <div class="col-12">Vote results:</div>
         </div>
         <div class="row">
           <div class="col-12"><votable-item-result [voteSubjectID]="one_vote_subject._id"></votable-item-result></div>

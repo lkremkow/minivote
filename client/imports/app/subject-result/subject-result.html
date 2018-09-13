@@ -1,0 +1,59 @@
+<div class="container">
+
+  <div class="row mt-3 mb-0">
+    <div class="col-12 alert-warning"><strong>Scope</strong></div>
+  </div>
+
+  <div *ngIf="votable_items_of_scope">
+  <div class="row mt-3 mb-0" *ngFor="let one_item_of_scope of votable_items_of_scope | async">
+    <div class="col-6">{{one_item_of_scope.title}}</div><div class="col-6">{{one_item_of_scope.vote_score}}</div>
+  </div>
+  </div>
+
+  <div class="row mt-3 mb-0">
+    <div class="col-12 alert-warning"><strong>Most Likely</strong></div>
+  </div>
+  <div *ngIf="votable_items_of_most_likely">
+    <div class="row mt-3 mb-0" *ngFor="let one_item_of_most_likely of votable_items_of_most_likely | async">
+      <div class="col-6">{{one_item_of_most_likely.title}}</div><div class="col-6">{{one_item_of_most_likely.vote_score}}</div>
+    </div>
+  </div>  
+
+  <div class="row mt-3 mb-0">
+    <div class="col-12 alert-warning"><strong>Biggest Impact</strong></div>
+  </div>
+  <div *ngIf="votable_items_of_most_damage">
+    <div class="row mt-3 mb-0" *ngFor="let one_item_of_most_damage of votable_items_of_most_damage | async">
+      <div class="col-6">{{one_item_of_most_damage.title}}</div><div class="col-6">{{one_item_of_most_damage.vote_score}}</div>
+    </div>
+  </div>    
+
+  <div class="row mt-3 mb-0">
+    <div class="col-12 alert-warning"><strong>Biggest Risk</strong></div>
+  </div>
+  <div *ngIf="most_risk_obs">
+    <div class="row mt-3 mb-0" *ngFor="let one_item_of_most_risk_obs of most_risk_obs | async">
+      <div class="col-6">{{one_item_of_most_risk_obs.title}}</div><div class="col-6">{{one_item_of_most_risk_obs.vote_score}}</div>
+    </div>
+  </div>   
+
+  <div class="row mt-3 mb-0">
+    <div class="col-12 alert-warning"><strong>Risks Addressed</strong></div>
+  </div>
+  <div *ngIf="votable_items_of_risks_addressed">
+    <div class="row mt-3 mb-0" *ngFor="let one_item_of_risks_addressed of votable_items_of_risks_addressed | async">
+      <div class="col-6">{{one_item_of_risks_addressed.title}}</div><div class="col-6">{{one_item_of_risks_addressed.vote_score}}</div>
+    </div>
+  </div>
+
+  <div class="row mt-3 mb-0">
+    <div class="col-12 alert-warning"><strong>Best Solutions</strong></div>
+  </div>
+  <div *ngIf="best_solutions_obs">
+    <div class="row mt-3 mb-0" *ngFor="let one_item_of_best_solutions_obs of best_solutions_obs | async">
+      <div class="col-6">{{one_item_of_best_solutions_obs.title}}</div><div class="col-6">{{one_item_of_best_solutions_obs.vote_score}}</div>
+    </div>
+  </div>  
+
+
+</div>

@@ -18,6 +18,7 @@ import { VotingEventList } from './voting-event-list/voting-event-list.component
 import { VotingEventView } from './voting-event-view/voting-event-view.component';
 import { VoteSubject } from './vote-subject/vote-subject.component';
 import { SubjectIndex } from './subject-index/subject-index.component'
+import { SubjectResult } from './subject-result/subject-result.component'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { GlobalDataService } from '../../../imports/global/globaldata.service';
@@ -97,6 +98,7 @@ import { GlobalDataService } from '../../../imports/global/globaldata.service';
     VotingEventView,
     VoteSubject,
     SubjectIndex,
+    SubjectResult,
     PageNotFoundComponent
   ],
   bootstrap: [

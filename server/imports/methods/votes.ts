@@ -7,30 +7,31 @@ import { votableItems } from '../../../imports/collections/votableItems';
 import { votableItem } from '../../../imports/models/votableItem';
 
 Meteor.methods({
-  castVote(vote_direction: string, votable_item_id: string, voter_id: number) {
-    // console.log("user", voter_id, "voted", vote_direction, "for", votable_item_id);
+  castVote(vote_direction_arg: string, votable_item_id_arg: string, voter_id_arg: number, vote_subject_id_arg: string) {
+    // console.log("user", voter_id, "voted", vote_direction_arg, "for", votable_item_id);
 
     let voteToCast: vote = {
-      voter_id: voter_id,
-      votable_item_id: votable_item_id,
+      voter_id: voter_id_arg,
+      votable_item_id: votable_item_id_arg,
+      vote_subject_id: vote_subject_id_arg,
       vote: 0,
       time_cast: new Date()
     };
 
-    if (vote_direction === 'up') {
+    if (vote_direction_arg === 'up') {
       voteToCast.vote = 1;
     };
-    if (vote_direction === 'neutral') {
+    if (vote_direction_arg === 'neutral') {
       voteToCast.vote = 0;
     };
-    if (vote_direction === 'down') {
+    if (vote_direction_arg === 'down') {
       voteToCast.vote = -1;
     };
 
     let hasVotedAlready: vote = votes.findOne(   {
       $and: [
-             { 'voter_id' : voter_id },
-             { 'votable_item_id' : votable_item_id }
+             { 'voter_id' : voter_id_arg },
+             { 'votable_item_id' : votable_item_id_arg }
             ]
     });
 

@@ -75,7 +75,10 @@ export class VotingEventEdit implements OnInit, OnDestroy {
       title: null,
       introduction: null,
       start_time: new Date().valueOf(),
-      end_time: new Date().valueOf()
+      end_time: new Date().valueOf(),
+      show_vote_subjects: true,
+      votes_open: true,
+      show_final_result: false
     };
   };
 

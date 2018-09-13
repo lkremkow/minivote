@@ -11,7 +11,7 @@
     </div>
 
     <div class="row mt-1 mb-1">
-      <div class="col-12">Meeting number: <input type="text" [(ngModel)]="public_event_id" (change)="tryPublicID()" size="6"></div>
+      <div class="col-12">Meeting number: <input type="text" [(ngModel)]="public_event_id" size="6"></div>
     </div>
 
     <div class="row mt-1 mb-1">
@@ -23,14 +23,28 @@
     </div>
 
   </div>
-  <div *ngIf="voting_event_id">
+  <div *ngIf="current_voting_event">
+    <div *ngFor="let this_voting_event of current_voting_event | async">
 
-    <div class="row mt-1 mb-1">
-      <div class="col-12"><h2>Vote Now</h2></div>
+      <div *ngIf="this_voting_event.show_vote_subjects">
+        <div class="row mt-1 mb-1">
+          <div class="col-12"><h2>Vote Now during {{this_voting_event.title}}</h2></div>
+        </div>
+
+        <subject-index [voteEventId]="this_voting_event._id"></subject-index>
+
+      </div>
+
+      <div *ngIf="this_voting_event.show_final_result">
+        <div class="row mt-1 mb-1">
+          <div class="col-12"><h2>{{this_voting_event.title}} Vote Results</h2></div>
+        </div>
+
+        <subject-result [voteEventId]="this_voting_event._id"></subject-result>
+  
+      </div>
+
     </div>
-
-    <subject-index></subject-index>
-
   </div>
 
 </div>

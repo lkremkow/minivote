@@ -1,29 +1,27 @@
-<div class="container">
 
-  <div class="row mt-0 mb-0" *ngIf="voter_editable">
-    <!-- <div class="col-6">available votable items, sorted by
-      <select [(ngModel)]="selected_sorting_option" size="1" (click)="fetchVotableItems()">
-        <option *ngFor='let sorting_option of item_list_sorting_options' [value]="sorting_option">{{sorting_option}}</option>
-      </select>
-    </div> -->
-    <!-- <div class="col-3 text-center">Vote Count</div> -->
-    <div class="col-12"><a href="#" [routerLink]="['/votable-item-edit', voting_subject_id]">Add</a> possible answers of your own.</div>
-  </div>
+<div class="row mt-3 mb-0" *ngIf="voter_editable">
+  <div class="col-12"><a href="#" [routerLink]="['/votable-item-edit', voting_subject_id]">Add</a> possible answers of your own.</div>
+</div>
+
+<div class="row mt-3 mb-0" *ngFor="let oneVotableItem of allVotableItems | async">
+
+  <div class="col-12 alert-primary">
+    <strong>{{oneVotableItem.title}}</strong> <span *ngIf="oneVotableItem.author === voter_id">
+      [<a href="#" [routerLink]="['/votable-item-edit', voting_subject_id, oneVotableItem._id]">Edit</a>]</span> <span *ngIf="oneVotableItem.author === voter_id">
+      [<a href="javascript:void(0);" (click)="removeVotableItem(oneVotableItem._id)">Del</a>]</span>
+  </div>  
   
-  <div class="row mt-2 mb-2" *ngFor="let oneVotableItem of allVotableItems | async">
-
-    <div class="col-2 col-sm-1 text-center"><button class="btn btn-success btn-sm" (click)="voteUp(oneVotableItem._id)">+</button></div>
-    <div class="col-2 col-sm-1 text-center"><button class="btn btn-danger btn-sm" (click)="voteDown(oneVotableItem._id)">-</button></div>
-
-    <div class="col-8 col-sm-8"><strong>{{oneVotableItem.title}}</strong></div>
-
-    <!-- <div class="col-3 text-center">{{oneVotableItem.vote_score}}</div> -->  
-    <!-- <div class="col-4 text-center"><button class="btn btn-warning btn-sm" (click)="voteNeutral(oneVotableItem._id)">Neutre</button></div> -->
-      
-  
-    <div class="col-6 col-sm-1 text-center" *ngIf="oneVotableItem.author === voter_id"><a href="#" [routerLink]="['/votable-item-edit', voting_subject_id, oneVotableItem._id]"><button class="btn btn-light btn-sm">Edit</button></a></div>
-    <div class="col-6col-sm-1  text-center" *ngIf="oneVotableItem.author === voter_id"><button class="btn btn-light btn-sm" (click)="removeVotableItem(oneVotableItem._id)">Del</button></div>
-      
+  <div class="col-12">
+    <span *ngIf="oneVotableItem.description"><small class="text-muted">{{oneVotableItem.description}}</small></span>
   </div>
 
+  <div class="col-3" *ngIf="votesCast">
+    <div *ngFor="let voteCast of votesCast | async">
+      <div *ngIf="voteCast.voter_id === voter_id && voteCast.votable_item_id === oneVotableItem._id">voted</div>
+    </div>
+  </div>
+  <div class="col-3"><button class="btn btn-success btn-sm" (click)="voteUp(oneVotableItem._id, oneVotableItem.vote_subject_id)">&#x2b;</button></div>
+  <div class="col-3"><button class="btn btn-primary btn-sm" (click)="voteNeutral(oneVotableItem._id, oneVotableItem.vote_subject_id)">&bull;</button></div>
+  <div class="col-3"><button class="btn btn-danger btn-sm" (click)="voteDown(oneVotableItem._id, oneVotableItem.vote_subject_id)">&#x2212;</button></div>
+  
 </div>

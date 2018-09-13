@@ -1,24 +1,92 @@
 <div class="container">
   
-  <div class="row">
-    <div class="col-12"><h3>questions</h3></div>
+  <div class="row mt-3 mb-0">
+    <div class="col-12"><h2>Questions</h2></div>
   </div>
 
-  <div class="row">
-    <div class="col-2"><label for="content">New question:</label></div>
-    <div class="col-8"><input type="text" [(ngModel)]="new_vote_subject.question_text" size="42"></div>
-    <div class="col-2"><button class="btn btn-primary btn-sm" (click)="addVoteSubject()">add</button></div>
+  <div class="row mt-3 mb-0">
+    <div class="col-12">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">New question</span>
+        </div>
+        <input type="text" class="form-control" placeholder="New question" aria-label="New question" [(ngModel)]="new_vote_subject.question_text" size="42">
+      </div>
+    </div>
   </div>
+
+  <div class="row mt-3 mb-0">
+    <div class="col-12">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Instructions</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Instructions" aria-label="instructions" [(ngModel)]="new_vote_subject.question_instructions">
+      </div>
+    </div>
+  </div>
+  
+  <div class="row mt-3 mb-0">
+    <div class="col-12"><button class="btn btn-primary" (click)="addVoteSubject()">add</button></div>
+  </div>  
 
   <div *ngIf="selected_vote_subjects">
-    <div class="row mt-1 mb-1" *ngFor="let one_vote_subject of selected_vote_subjects | async; let position = index">
-      <div class="col-1"><button class="btn btn-warning btn-sm" (click)="updateVotingEvent(one_vote_subject)">update</button></div>
-      <div class="col-1"><input type="number" style="width: 3em;" [(ngModel)]="one_vote_subject.question_number"></div>
-      <div class="col-3"><input type="text" [(ngModel)]="one_vote_subject.question_text" size="20"></div>
-      <div class="col-2">Show: <input type="checkbox" [(ngModel)]="one_vote_subject.show_question"></div>
-      <div class="col-2">Results: <input type="checkbox" [(ngModel)]="one_vote_subject.show_results"></div>
-      <div class="col-2">Modifiable: <input type="checkbox" [(ngModel)]="one_vote_subject.voter_editable"></div>
-      <div class="col-1"><button class="btn btn-danger btn-sm" (click)="removeVoteSubject(one_vote_subject._id)">delete</button></div>
+    <div class="row mt-3 mb-0" *ngFor="let one_vote_subject of selected_vote_subjects | async; let position = index">
+      <div class="col-4"><button class="btn btn-warning" (click)="updateVotingEvent(one_vote_subject)">update</button></div>
+      <div class="col-3"><input type="number" style="width: 3em;" [(ngModel)]="one_vote_subject.question_number"></div>
+      <div class="col-5">
+        <div class="input-group mb-3">  
+          <div class="input-group-prepend">
+            <span class="input-group-text">Modifiable</span>
+            <div class="input-group-text">
+              <input type="checkbox" aria-label="Modifiable" [(ngModel)]="one_vote_subject.voter_editable">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">quest.</span>
+          </div>
+          <input type="text" class="form-control" placeholder="" aria-label="quest" [(ngModel)]="one_vote_subject.question_text">
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">inst.</span>
+          </div>
+          <input type="text" class="form-control" placeholder="" aria-label="inst" [(ngModel)]="one_vote_subject.question_instructions">
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="input-group mb-3">  
+          <div class="input-group-prepend">
+            <span class="input-group-text">Show</span>
+            <div class="input-group-text">
+              <input type="checkbox" aria-label="Show" [(ngModel)]="one_vote_subject.show_question">
+            </div>
+          </div>
+        </div>        
+      </div>
+      
+      <div class="col-6">
+        <div class="col-6">
+          <div class="input-group mb-3">  
+            <div class="input-group-prepend">
+              <span class="input-group-text">Results</span>
+              <div class="input-group-text">
+                <input type="checkbox" aria-label="Results" [(ngModel)]="one_vote_subject.show_results">
+              </div>
+            </div>
+          </div>        
+        </div>        
+      </div>
+      
+      <div class="col-12"><button class="btn btn-primary btn-sm" (click)="copyPreviousVotableItemsTo(one_vote_subject._id, voter_id)">copy votable items from previous</button></div>
+      <div class="col-6"><button class="btn btn-danger btn-sm" (click)="removeVotableItemsForSubject(one_vote_subject._id)">delete votable items</button></div>
+      <div class="col-6"><button class="btn btn-danger btn-sm" (click)="removeVoteSubject(one_vote_subject._id)">delete question</button></div>
     </div>
   </div>
 

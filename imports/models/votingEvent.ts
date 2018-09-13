@@ -7,5 +7,7 @@ export interface votingEvent {
   introduction: string,
   start_time: number,
   end_time: number,
-  vote_subjects?: voteSubject[],
+  show_vote_subjects: boolean,
+  votes_open: boolean,
+  show_final_result: boolean
 };

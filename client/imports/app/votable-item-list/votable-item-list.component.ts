@@ -9,6 +9,9 @@ import { votableItem } from '../../../../imports/models/votableItem';
 
 import { voter } from '../../../../imports/models/voter';
 
+import { votes } from '../../../../imports/collections/votes';
+import { vote } from '../../../../imports/models/vote';
+
 import { GlobalDataService } from '../../../../imports/global/globaldata.service';
 
 @Component({
@@ -25,8 +28,13 @@ export class VotableItemList implements OnInit, OnDestroy {
   voting_event_id: string;
 
   allVotableItems: Observable<votableItem[]>;
-  // allVotableItems: votableItem[];
+  allVotableItemsArray: votableItem[];
+  
   votableItemSubscription: Subscription;
+  anotherVotableItemSubscription: Subscription;
+
+  votesCastSubscription: Subscription;
+  votesCast: Observable<vote[]>;
 
   validLogin: Observable<voter[]>;
   loginSubscription: Subscription;
@@ -53,12 +61,19 @@ export class VotableItemList implements OnInit, OnDestroy {
     this.voting_event_id = this.local_session_storage.getItem("voting_event_id");
     
     this.fetchVotableItems();
+    this.fetchRecordedVotes();
   };
 
   ngOnDestroy() {
     if (this.votableItemSubscription) {
       this.votableItemSubscription.unsubscribe();
     };
+    if (this.anotherVotableItemSubscription) {
+      this.anotherVotableItemSubscription.unsubscribe();
+    };
+    if (this.votesCastSubscription) {
+      this.votesCastSubscription.unsubscribe();
+    };    
   };
 
   removeVotableItem(votable_item_id: string) {
@@ -75,21 +90,34 @@ export class VotableItemList implements OnInit, OnDestroy {
       //   this.allVotableItems = votableItems.find({ vote_subject_id: { $eq: this.voting_subject_id } }, {sort: { vote_score: -1, title: 1, modified_on: 1 } });
       // } else if (this.selected_sorting_option === 'newset first') {
       // this.allVotableItems = votableItems.find({ vote_subject_id: { $eq: this.voting_subject_id } }, {sort: { modified_on: -1, title: 1, vote_score: -1} });
-    this.allVotableItems = votableItems.find({ vote_subject_id: { $eq: this.voting_subject_id } }, {sort: { modified_on: 1, title: 1, vote_score: -1} });
-      // };      
+      this.allVotableItems = votableItems.find({ vote_subject_id: { $eq: this.voting_subject_id } }, {sort: { title: 1, question_family_id: 1} });
+
+      // this.anotherVotableItemSubscription = this.allVotableItems.subscribe( (val) => {
+      //   this.allVotableItemsArray = val;
+      //   console.log("found " + val.length + " votable items");
+      //   if (val.length > 0) {
+      //   };
+      //   console.log(this.allVotableItemsArray[0].title)
+      // });
     });
   };
 
-  voteUp(votable_item_id: string): void {
-    Meteor.call('castVote', "up", votable_item_id, this.voter_id);
+  fetchRecordedVotes(): void {
+    this.votesCastSubscription = MeteorObservable.subscribe('votesCast').subscribe(() => {
+      this.votesCast = votes.find({ voter_id: { $eq: this.voter_id } } );
+    });    
   };
 
-  voteNeutral(votable_item_id: string): void {
-    Meteor.call('castVote', "neutral", votable_item_id, this.voter_id);
+  voteUp(votable_item_id_arg: string, vote_subject_id_arg: string): void {
+    Meteor.call('castVote', "up", votable_item_id_arg, this.voter_id, vote_subject_id_arg);
   };
 
-  voteDown(votable_item_id: string): void {
-    Meteor.call('castVote', "down", votable_item_id, this.voter_id);
+  voteNeutral(votable_item_id: string, vote_subject_id_arg: string): void {
+    Meteor.call('castVote', "neutral", votable_item_id, this.voter_id, vote_subject_id_arg);
+  };
+
+  voteDown(votable_item_id: string, vote_subject_id_arg: string): void {
+    Meteor.call('castVote', "down", votable_item_id, this.voter_id, vote_subject_id_arg);
   };
 
 

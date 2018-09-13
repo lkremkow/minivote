@@ -31,4 +31,19 @@
     <div class="col-10"><input [(ngModel)]="voting_event.end_time" size="42"></div>    
   </div>
 
+  <div class="row">
+    <div class="col-2"><label for="content">Show Vote Subjects:</label></div>
+    <div class="col-10"><input type="checkbox" [(ngModel)]="voting_event.show_vote_subjects"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-2"><label for="content">Votes Open</label></div>
+    <div class="col-10"><input type="checkbox" [(ngModel)]="voting_event.votes_open"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-2"><label for="content">Show Final Result</label></div>
+    <div class="col-10"><input type="checkbox" [(ngModel)]="voting_event.show_final_result"></div>
+  </div>
+
 </div>

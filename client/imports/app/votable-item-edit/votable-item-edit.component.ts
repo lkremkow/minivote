@@ -10,6 +10,8 @@ import { GlobalDataService } from '../../../../imports/global/globaldata.service
 import { votableItems } from '../../../../imports/collections/votableItems';
 import { votableItem } from '../../../../imports/models/votableItem';
 
+import objectID = Mongo.ObjectID;
+
 @Component({
   selector: 'votable-item-edit',
   templateUrl: 'votable-item-edit.html',
@@ -87,6 +89,7 @@ export class VotableItemEdit {
       vote_subject_id: this.vote_subject_id,
       title: null,
       description: null,
+      question_family_id: new objectID().toHexString(),
       author: this.voter_id,
       vote_score: 0,
       modified_on: new Date().valueOf()
