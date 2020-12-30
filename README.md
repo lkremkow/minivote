@@ -23,6 +23,8 @@
 
    `npm install`
 
+   If you are on MacOS, also run: `npm install fsevents` (fsevents is only on MacOS, not Linux). It's not included in package.json, so you need to manually add it in on MacOS.
+
 
 ## Re-Installation
 
