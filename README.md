@@ -5,8 +5,9 @@
 
 ## Requirements
 
-   * [Node.js](https://nodejs.org/en/); tested with 8.9.4 and 8.11.3 LTS
-   * [NPM](https://www.npmjs.com); tested with 5.6.0, 6.1.0, and 6.3.0
+   * [Node.js](https://nodejs.org/en/); tested with 8.9.4, 8.11.3 LTS, and v14.15.3
+   * [NPM](https://www.npmjs.com); tested with 5.6.0, 6.1.0, 6.3.0, and 6.14.9
+   * [Meteor](https://www.meteor.com/install); tested with 1.6-1.6.1.4
 
 
 ## Notes
